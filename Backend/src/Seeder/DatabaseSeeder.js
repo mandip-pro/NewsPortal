@@ -5,15 +5,15 @@ class DatabaseSeeder{
     static run(){
         let userData=[
             {
-                'name':'admin',
-                'email':'admin@gmail.com',
-                'password':'admin123',
-                'gender':'male'
-            },
-            {
                 'name':'user',
                 'email':'user@gmail.com',
                 'password':'user123',
+                'gender':'male'
+            },
+            {
+                'name':'12',
+                'email':"12@gmail.com",
+                'password':'12',
                 'gender':'male'
             },
             {
@@ -39,11 +39,12 @@ class DatabaseSeeder{
                 'name':'Entertainment'
             },
             {
-                'name':'politics'
+                'name':'Politics'
             },
             {
                 'name':'Sports'
-            }
+            },
+            
         ]
 
         categoryData.forEach(async (category)=>{

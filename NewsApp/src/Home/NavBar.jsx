@@ -9,13 +9,9 @@ function NavBar(props) {
     const token=localStorage.getItem('userToken')
 
     if(token){
-      setIsLoggedIn(!isLoggedIn)
-      console.log(isLoggedIn);
-      
+      setIsLoggedIn(!isLoggedIn)      
     }else{
-      setIsLoggedIn(isLoggedIn)
-      console.log(isLoggedIn);
-      
+      setIsLoggedIn(isLoggedIn)      
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
@@ -25,10 +21,9 @@ function NavBar(props) {
       responce = await responce.json();
       if (responce.state) {
         toast.success(responce.message);
-        setIsLoggedIn(!isLoggedIn)
-        console.log(isLoggedIn);
-        
+        setIsLoggedIn(!isLoggedIn)        
         localStorage.clear()
+        window.location.reload()
         //navigate
       } else {
         toast.error(responce.message);

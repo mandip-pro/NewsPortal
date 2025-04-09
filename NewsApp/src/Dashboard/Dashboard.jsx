@@ -1,6 +1,9 @@
 // Dashboard.js
 import React from "react";
 import './Dashboard.css';
+import toast,{Toaster} from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
     return (
@@ -8,10 +11,10 @@ const Sidebar = () => {
             <h2>Dashboard</h2>
             <nav>
                 <ul>
-                    <li><a href="#">Home</a></li>
+                    <li><Link to={'/admin/dashboard'}>Home</Link></li>
                     <li><a href="#">Profile</a></li>
-                    <li><a href="#">Analytics</a></li>
-                    <li><a href="#">Settings</a></li>
+                    <li><Link to='/admin/create-news'>Create-News</Link></li>
+                    <li><a href="#">Setting</a></li>
                 </ul>
             </nav>
         </div>
@@ -19,11 +22,28 @@ const Sidebar = () => {
 };
 
 const Header = () => {
+    const navigate=useNavigate()
+    const handleLogOut=async ()=>{
+        try {
+          let responce = await fetch("http://127.0.0.1:3000/api/auth/logout");
+          responce = await responce.json();
+          if (responce.state) {
+            toast.success(responce.message);
+            localStorage.clear()
+            navigate('/')
+            //navigate
+          } else {
+            toast.error(responce.message);
+          }
+        } catch (err) {
+          console.log(err);
+        }
+      }
     return (
         <div className="header">
             <h1>Welcome to the Dashboard</h1>
             <div>
-                <button>Logout</button>
+                <button onClick={handleLogOut}>Logout</button>
             </div>
         </div>
     );
@@ -39,6 +59,7 @@ const Card = ({ title, content }) => {
 };
 
 const Dashboard = () => {
+    
     return (
         <div className="dashboard-container">
             <Sidebar />
@@ -60,6 +81,7 @@ const Dashboard = () => {
                     
                 </div>
             </div>
+            <Toaster/>
         </div>
     );
 };

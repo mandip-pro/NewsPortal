@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import './CreateNews.css'
 
 function CreateNews() {
     const navigate=useNavigate()
@@ -10,27 +11,6 @@ function CreateNews() {
         categoryId:''
     })
     const [image,setImage]=useState()
-    
-
-    //create category
-    //     if(!isCategory){
-    //         const category={
-    //             name:data.category
-    //         }
-    //         let responce=await fetch("http://127.0.0.1:3000/api/category",{
-    //             method:'post',
-    //             headers:{
-    //                 "Content-Type": "application/json",
-    //             },
-    //             body:JSON.stringify(category)
-    //         })
-    //         responce=await responce.json()
-    //         // setCategoryId(responce.responce._id)
-    //         console.log(responce)
-    //     }
-    // }
-
-
     async function fetchCategory(){
         try{
             let res=await fetch(`http://127.0.0.1:3000/api/category/`)
@@ -103,6 +83,7 @@ function CreateNews() {
           <div className="input-box">
             <textarea
               placeholder="news-description"
+              rows={1}
               name="description"
               onChange={handleChange}
               required
@@ -111,13 +92,13 @@ function CreateNews() {
             ></textarea>
           </div>
           <div className="input-box">
-            <select name="categoryId" id="" required onChange={handleChange}>
-              <option value=''>....select....</option>
+            <select name="categoryId" id="" required onChange={handleChange} className='custom-select'>
+              <option value='' >....select....</option>
               {
                 catData.map((cat)=>{
 
                   return(
-                    <option value={cat._id}>{cat.name}</option>
+                    <option value={cat._id}  >{cat.name}</option>
 
                   )
                 })
@@ -125,21 +106,38 @@ function CreateNews() {
             </select>
           </div>
           
-          
-          <div
-            className="input-box"
+          <div className="input-box file-upload">
+            <input
+              type="file"
+              name="image"
+              onChange={handleImageChange}
+              id="file-input"
+              className="custom-file-input"
+            />
+            <label htmlFor="file-input" className="custom-file-label">
+              Choose an image
+            </label>
+            {image && <span className="file-name">{image.name}</span>}
+          </div>
+          {/* <div
+            className="input-box file-upload"
           >
             <input
               type="file"
               placeholder="enter-image"
               name="image"
               onChange={handleImageChange}
-              className="input-field"
+              id='file-input'
+              className="custom-file-input"
               autoComplete="off"
             ></input>
-          </div>
+            {image && <span className="file-name">{image.name}</span>}
+          </div> */}
           <div className="input-submit">
-            <button>Add Record</button>
+            
+            <button
+            className="submit-btn"
+            id="submit"></button>
             <label htmlFor="submit">Create</label>
           </div>
           </form>

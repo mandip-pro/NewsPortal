@@ -75,10 +75,15 @@ function Login() {
           localStorage.setItem('userToken',responce.token)
           const userInfo={
             name:responce.findUser.name,
-            email:responce.findUser.email
+            email:responce.findUser.email,
+            id:responce.findUser._id
           }
           localStorage.setItem('userInfo',JSON.stringify(userInfo))
-           navigate('/')
+          if(responce.findUser.role==='admin'){
+            navigate('/admin/dashboard')
+          }else{
+            navigate('/')
+          }
           //navigate
         } else {
           toast.error(responce.message);

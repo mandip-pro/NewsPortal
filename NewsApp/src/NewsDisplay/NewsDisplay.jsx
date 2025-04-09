@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import './NewsDisplay.css'
-import NavBar from '../Home/NavBar';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import "./NewsDisplay.css";
+import NavBar from "../Home/NavBar";
+import { CiSaveDown2 } from "react-icons/ci";
+
 function FullArticlePage() {
-    const {id}=useParams()
+  const { id } = useParams();
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -11,9 +13,8 @@ function FullArticlePage() {
   useEffect(() => {
     const fetchArticle = async () => {
       try {
-        let responce=await fetch("http://127.0.0.1:3000/api/news/"+id)
-      responce=await responce.json()
-      console.log(responce)
+        let responce = await fetch("http://127.0.0.1:3000/api/news/" + id);
+        responce = await responce.json();
         setArticle(responce);
         setLoading(false);
       } catch (err) {
@@ -32,23 +33,38 @@ function FullArticlePage() {
   if (error) {
     return <div>Error: {error}</div>;
   }
-  const styling={
+  const styling = {
     fontWeight: 600,
     transform: "scale(1.05)",
-    textDecoration: "none"
-  }
+    textDecoration: "none",
+  };
   return (
     <>
-    <NavBar style={styling}/>
-    <div className="full-article">
-      <h1>{article.title}</h1>
-      <p><strong>Source: </strong>article.source.name</p>
-      <img src={article.image} alt={article.title} className="full-article-img" />
-      <div className="full-article-content">
-        <p>{article.description}</p>
-        <a href={'http://google.com'} target="_blank" rel="noopener noreferrer">Read more on the website</a>
+      <NavBar style={styling} />
+      <div className="full-article">
+        <div className="top">
+          <h1>{article.title}</h1>
+          <CiSaveDown2 size={25} className="save-icon"/>
+        </div>
+        <p>
+          <strong>Source: </strong>article.source.name
+        </p>
+        <img
+          src={article.image}
+          alt={article.title}
+          className="full-article-img"
+        />
+        <div className="full-article-content">
+          <p>{article.description}</p>
+          <a
+            href={"http://google.com"}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Read more on the website
+          </a>
+        </div>
       </div>
-    </div>
     </>
   );
 }
