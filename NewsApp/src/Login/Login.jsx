@@ -69,8 +69,7 @@ function Login() {
           body:JSON.stringify(data)
         })
         responce=await responce.json()
-        console.log(responce)
-        if (responce.state) {
+         if (responce.state) {
           toast.success(responce.message);
           localStorage.setItem('userToken',responce.token)
           const userInfo={

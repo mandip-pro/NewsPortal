@@ -43,7 +43,12 @@ function Sidebar(props) {
   const handleClicked=async(e)=>{
     e.preventDefault()
     setClick(!click)
-    navigate('/saved')
+    if(token){
+      navigate('/saved')
+    }else{
+      navigate('/login')
+    }
+    
   }
   return (
     <div className="sidebar">

@@ -43,8 +43,13 @@
     text-decoration: none;
     color: #007BFF;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .news-card-link:hover {
     text-decoration: underline;
+}
+.function{
+    display: flex;
+    justify-content: space-between;
 }
