@@ -1,5 +1,5 @@
 // Dashboard.js
-import React from "react";
+import React, { useEffect } from "react";
 import './Dashboard.css';
 import toast,{Toaster} from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
@@ -59,6 +59,19 @@ const Card = ({ title, content }) => {
 };
 
 const Dashboard = () => {
+    const naavigate=useNavigate()
+    useEffect(()=>{
+        let token=localStorage.getItem('userToken')
+        if(token){
+            let user=localStorage.getItem('userInfo')
+            user=JSON.parse(user)
+            if(!(user.role==='admin')){
+                naavigate('/')
+            }
+        }else{
+            naavigate('/login')
+        }
+    },[])
     
     return (
         <div className="dashboard-container">

@@ -76,7 +76,7 @@ function Login() {
           const userInfo={
             name:responce.findUser.name,
             email:responce.findUser.email,
-            id:responce.findUser._id
+            role:responce.findUser.role
           }
           localStorage.setItem('userInfo',JSON.stringify(userInfo))
           if(responce.findUser.role==='admin'){

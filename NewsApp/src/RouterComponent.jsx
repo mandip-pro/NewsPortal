@@ -5,6 +5,7 @@ import Login from './Login/Login.jsx'
 import Dashboard from './Dashboard/Dashboard.jsx'
 import CreateNews from './Dashboard/CreateNews/CreateNews.jsx'
 import NewsDisplay from '../src/NewsDisplay/NewsDisplay.jsx'
+import SavedNews from '../src/Home/SavedNews.jsx'
 
 function RouterComponent() {
     
@@ -14,6 +15,7 @@ function RouterComponent() {
             <Route path="/" element={<Home/>}/>
             <Route path="/Content/:id" element={<NewsDisplay/>}/>
             <Route path='/login' element={<Login/>}/>
+            <Route path='/saved' element={<SavedNews/>}/>
 
             {/* admin */}
             <Route path='/admin/dashboard' element={<Dashboard/>}/>

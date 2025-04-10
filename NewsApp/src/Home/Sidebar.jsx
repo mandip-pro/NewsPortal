@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 function Sidebar(props) {
+  const navigate=useNavigate()
   const [categories, setCategories] = useState(["Trending"]);
   const [activeCategory, setActiveCategory] = useState("Trending");
   const [click,setClick]=useState(false)
@@ -36,12 +39,16 @@ function Sidebar(props) {
     setActiveCategory(activeCategory === category ? activeCategory : category);
   };
   props.setSelectedCategory(activeCategory);
-  const handleClicked=async()=>{
+  
+  const handleClicked=async(e)=>{
+    e.preventDefault()
     setClick(!click)
+    navigate('/saved')
   }
   return (
     <div className="sidebar">
-      <h3>Categories</h3>
+      <div>
+        <h3>Categories</h3>
       <ul>
         {categories.map((category) => (
           <li
@@ -53,10 +60,15 @@ function Sidebar(props) {
           </li>
         ))}
       </ul>
-      <div className={click?'collection active':"collection"} onClick={handleClicked} >
+      </div>
+      
+      <div className="sidebar-bottom">
+        <div className={click?'collection active':"collection"} onClick={handleClicked} >
        <p>My News</p> 
       </div>
       <div className="collection1" style={{display: token ?'inline':'none'}}>{name}</div>
+      </div>
+      
     </div>
   );
 }
